@@ -1,0 +1,31 @@
+package org.proyectosfgk.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
+
+@SuppressWarnings("deprecation")
+@Configuration
+@ComponentScan("org.proyectosfgk")
+@EnableWebMvc
+//Cambiar a implements WebMvcConfigurer
+public class AppConfig extends WebMvcConfigurerAdapter{
+
+	@Bean
+	public InternalResourceViewResolver getInternalResourceViewResolver() {
+		System.out.println("Iniciando");
+		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+		resolver.setPrefix("/WEB-INF/jsp/");
+		resolver.setSuffix(".jsp");
+		return resolver;
+	}
+	
+	@Override
+	public void addResourceHandlers(final ResourceHandlerRegistry registry) {
+	    registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+	}
+}
